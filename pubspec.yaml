@@ -1,0 +1,88 @@
+name: demo_app
+description: "A new Flutter project."
+
+publish_to: 'none'
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.4
+  flutter: ">=3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+    
+  flutter_riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
+  http: ^1.2.2
+  cupertino_icons: ^1.0.8
+  freezed_annotation: ^2.0.0
+  json_annotation: ^4.8.0
+  dio: ^5.7.0
+  shared_preferences: ^2.3.3
+  build_runner: ^2.4.13
+  freezed: ^2.5.7
+  json_serializable: ^6.9.0
+  go_router: ^14.6.2
+  carousel_slider: ^4.2.1
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+  
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/image/Daksde.png
+    - assets/image/Daksde2.png
+    - assets/image/Item1.png
+    - assets/image/Item2.png
+    - assets/image/Item3.png
+    - assets/image/Item4.png
+    - assets/image/Item5.png
+    - assets/image/venice_collection.png
+    - assets/image/Frame 1.png
+    - assets/image/Frame 2.png
+    - assets/image/Frame 3.png
+    - assets/image/Frame 4.png
+    - assets/image/Frame 5.png
+    - assets/image/Frame 6.png
+    - assets/image/Frame 7.png
+    - assets/image/s1.png
+    - assets/image/s2.png
+    - assets/image/sw1.png
+    - assets/image/sw2.png
+    - assets/image/a1.png
+    - assets/image/paypal.png
+    - assets/image/mastercard.png
+    - assets/image/applepay.png
+    - assets/image/backgroundImage.png
+    - assets/image/Rectangle 14.png
+
+
+
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  
