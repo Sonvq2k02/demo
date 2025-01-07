@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:demo_app/screens/user_profile_screen.dart';
+import 'package:demo_app/screens/homePage/AppDemo.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
-import 'package:demo_app/screens/login/login_view.dart';
+import 'package:demo_app/screens/loginVSregister/login_view.dart';
 
 void main() {
   HttpOverrides.global = MyHttpOverrides();
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: UserProfileScreen(), // Bắt đầu với trang giới thiệu
+      home: AppDemo(), // Bắt đầu với trang giới thiệu
     );
   }
 }

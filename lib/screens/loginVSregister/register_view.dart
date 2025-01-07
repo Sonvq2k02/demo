@@ -1,4 +1,4 @@
-import 'package:demo_app/screens/register/register_model.dart';
+import 'package:demo_app/screens/loginVSregister/register_model.dart';
 import 'package:flutter/material.dart';
 
 class RegisterView extends StatefulWidget {

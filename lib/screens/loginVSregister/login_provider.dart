@@ -1,6 +1,6 @@
 // lib/providers/auth_provider.dart
 
-import 'package:demo_app/screens/login/login_service.dart';
+import 'package:demo_app/screens/loginVSregister/login_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final authServiceProvider = Provider<AuthService>((ref) {
