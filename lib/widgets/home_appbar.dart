@@ -1,4 +1,8 @@
+import 'package:demo_app/screens/loginVSregister/login_view.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../screens/loginVSregister/login_userinfo.dart';
 
 class HomeAppbar extends StatefulWidget {
   const HomeAppbar({super.key});
@@ -24,14 +28,45 @@ class _HomeAppbarState extends State<HomeAppbar> {
           "Logo",
           style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
         ),
-        CircleAvatar(
-          //backgroundImage: AssetImage("  "),
-          radius: 20,
-          backgroundColor: Colors.pink,
-          child: Icon(
-            Icons.person,
-            color: Colors.black,
-            size: 24,
+        GestureDetector(
+          onTap: () async {
+            final prefs = await SharedPreferences.getInstance();
+            final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+
+            if (isLoggedIn) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => UserInfoPage()),
+              );
+            } else {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LoginView()),
+              );
+            }
+          },
+          child: CircleAvatar(
+            radius: 20,
+            backgroundColor: Colors.purple[400],
+            child: FutureBuilder<String?>(
+              future: SharedPreferences.getInstance()
+                  .then((prefs) => prefs.getString('username')),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                }
+                if (snapshot.data != null) {
+                  return Text(
+                    snapshot.data![0]
+                        .toUpperCase(), // Hiển thị ký tự đầu tiên của username
+                    style: const TextStyle(color: Colors.white, fontSize: 18),
+                  );
+                } else {
+                  return const Icon(Icons.person,
+                      color: Colors.black, size: 24);
+                }
+              },
+            ),
           ),
         ),
       ],

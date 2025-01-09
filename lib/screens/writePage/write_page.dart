@@ -1,19 +1,19 @@
 import 'package:demo_app/widgets/home_appbar.dart';
 import 'package:flutter/material.dart';
 
-import '../../widgets/library_getFirstSection.dart';
-import '../../widgets/library_getFourthSection.dart';
-import '../../widgets/library_getSecondSection.dart';
-import '../../widgets/library_getThirdSection.dart';
+import '../../widgets/Write_getFourthSection.dart';
+import '../../widgets/Write_getSecondSection.dart';
+import '../../widgets/Write_getThirdSection.dart';
+import '../../widgets/write_getFirstSection.dart';
 
-class LibraryPage extends StatefulWidget {
-  const LibraryPage({super.key});
+class WritePage extends StatefulWidget {
+  const WritePage({super.key});
 
   @override
-  State<LibraryPage> createState() => _LibraryPageState();
+  State<WritePage> createState() => _WritePageState();
 }
 
-class _LibraryPageState extends State<LibraryPage> {
+class _WritePageState extends State<WritePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,18 +32,19 @@ class _LibraryPageState extends State<LibraryPage> {
             const SizedBox(height: 10),
             //HomeAppbar(),
             const SizedBox(height: 30),
-            LibraryGetfirstsection(),
+            WriteGetfirstsection(),
             const SizedBox(height: 10),
             Divider(color: Colors.grey.shade300),
-            LibraryGetsecondsection(),
+            WriteGetsecondsection(),
             Divider(color: Colors.grey.shade300),
             const SizedBox(height: 10),
-            LibraryGetthirdsection(),
+            WriteGetthirdsection(),
+            Divider(color: Colors.grey.shade300),
             const SizedBox(height: 10),
-            LibraryGetfourthsection(),
+            WriteGetfourthsection(),
             const SizedBox(height: 10),
 
-            //  LibraryGetfifthsection()
+            //  WriteGetfifthsection()
           ],
         ),
       ),

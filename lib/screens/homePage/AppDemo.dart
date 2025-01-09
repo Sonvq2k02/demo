@@ -1,5 +1,6 @@
 import 'package:demo_app/screens/homePage/home_page.dart';
 import 'package:demo_app/screens/libraryPage/library_page.dart';
+import 'package:demo_app/screens/writePage/write_page.dart';
 import 'package:demo_app/ui/main/home_page.dart';
 import 'package:demo_app/ui/search/search_page.dart';
 import 'package:flutter/material.dart';
@@ -32,12 +33,7 @@ class _AppDemoState extends State<AppDemo> {
         TrangChu(),
         SearchPage(),
         LibraryPage(),
-        Center(
-          child: Text(
-            "Write Page",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-        ),
+        WritePage(),
         Center(
           child: Text(
             "Updates Page",

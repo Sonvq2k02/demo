@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../book.dart';
 
@@ -18,5 +19,28 @@ class ApiService {
     } catch (e) {
       throw Exception('Failed to load books: $e');
     }
+  }
+}
+
+class BookListNotifier extends StateNotifier<List<Book>> {
+  BookListNotifier() : super([]);
+
+  final ApiService apiService = ApiService();
+
+  Future<void> fetchBooks() async {
+    try {
+      final books = await apiService.fetchBooks();
+      state = books; // Cập nhật trạng thái với danh sách sách
+    } catch (e) {
+      throw Exception('Failed to load books: $e');
+    }
+  }
+
+  void addBook(Book book) {
+    state = [...state, book]; // Thêm sách mới
+  }
+
+  void removeBook(int bookId) {
+    state = state.where((book) => book.id != bookId).toList(); // Xóa sách
   }
 }

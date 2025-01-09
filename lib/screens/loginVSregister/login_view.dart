@@ -1,5 +1,7 @@
 import 'package:demo_app/models/user.dart';
+import 'package:demo_app/screens/homePage/AppDemo.dart';
 import 'package:demo_app/screens/loginVSregister/login_provider.dart';
+import 'package:demo_app/screens/loginVSregister/login_userinfo.dart';
 import 'package:demo_app/screens/loginVSregister/register_view.dart';
 import 'package:demo_app/ui/main/home_page.dart';
 import 'package:flutter/material.dart';
@@ -72,8 +74,7 @@ class LoginView extends ConsumerWidget {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          HomePage(handleChangeScreen: (int) {}),
+                      builder: (context) => AppDemo(),
                     ),
                   );
                 } else {
