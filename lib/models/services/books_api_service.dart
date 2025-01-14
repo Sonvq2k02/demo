@@ -20,6 +20,36 @@ class ApiService {
       throw Exception('Failed to load books: $e');
     }
   }
+
+  Future<Book> fetchBookById(int id) async {
+    try {
+      final response = await dio.get(
+        'https://105a7394-9e19-4b48-9270-6fa500fe4b4a.mock.pstmn.io/books',
+      );
+
+      if (response.statusCode == 200) {
+        // Kiểm tra nếu response trả về danh sách
+        if (response.data is List<dynamic>) {
+          // Tìm sách có ID trùng khớp
+          final bookData = (response.data as List<dynamic>)
+              .cast<Map<String, dynamic>>()
+              .firstWhere((book) => book['id'] == id, orElse: () => {});
+
+          if (bookData.isNotEmpty) {
+            return Book.fromJson(bookData);
+          } else {
+            throw Exception('Book with ID $id not found');
+          }
+        } else {
+          throw Exception('Unexpected data format: ${response.data}');
+        }
+      } else {
+        throw Exception('Failed to load book (status: ${response.statusCode})');
+      }
+    } catch (e) {
+      throw Exception('Error fetching book by ID: $e');
+    }
+  }
 }
 
 class BookListNotifier extends StateNotifier<List<Book>> {
@@ -30,9 +60,13 @@ class BookListNotifier extends StateNotifier<List<Book>> {
   Future<void> fetchBooks() async {
     try {
       final books = await apiService.fetchBooks();
-      state = books; // Cập nhật trạng thái với danh sách sách
+      if (books.isEmpty) {
+        throw Exception('No books found');
+      }
+      state = books;
     } catch (e) {
-      throw Exception('Failed to load books: $e');
+      print('Failed to fetch books: $e');
+      rethrow; // Bắn lại lỗi nếu cần xử lý bên trên
     }
   }
 

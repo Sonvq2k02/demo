@@ -1,73 +1,27 @@
-class Book {
-  final int id; // ID sách
-  final String title; // Tiêu đề
-  final String subTitle; // Phụ đề
-  final String author; // Tác giả
-  final String image; // URL hình ảnh
-  final int views; // Số lượt xem
-  final String datePublished; // Ngày xuất bản
-  final String dateUpdated; // Ngày cập nhật
-  final int chapterCount; // Số chương
-  final String latestChapterDate; // Ngày chương mới nhất
-  final int commentsCount; // Số lượt bình luận
-  final String content; // Nội dung mô tả
-  final String category; // Thể loại
-  final String status; // Trạng thái (Hoàn thành hoặc Chưa hoàn thành)
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  Book({
-    required this.id,
-    required this.title,
-    required this.subTitle,
-    required this.author,
-    required this.image,
-    required this.views,
-    required this.datePublished,
-    required this.dateUpdated,
-    required this.chapterCount,
-    required this.latestChapterDate,
-    required this.commentsCount,
-    required this.content,
-    required this.category,
-    required this.status,
-  });
+part 'book.freezed.dart';
+part 'book.g.dart';
 
-  // Phương thức từ JSON
-  factory Book.fromJson(Map<String, dynamic> json) {
-    return Book(
-      id: json['id'],
-      title: json['title'],
-      subTitle: json['sub_title'],
-      author: json['author'],
-      image: json['image'],
-      views: json['views'],
-      datePublished: json['date_published'],
-      dateUpdated: json['date_updated'],
-      chapterCount: json['chapter_count'],
-      latestChapterDate: json['latest_chapter_date'],
-      commentsCount: json['comments_count'],
-      content: json['content'],
-      category: json['category'],
-      status: json['status'], // Thêm trạng thái
-    );
-  }
+@freezed
+class Book with _$Book {
+  factory Book({
+    int? id,
+    String? title,
+    String? subTitle,
+    String? author,
+    String? image,
+    int? views,
+    String? datePublished,
+    String? dateUpdated,
+    int? chapterCount,
+    String? latestChapterDate,
+    int? commentsCount,
+    String? content,
+    String? category,
+    String? status,
+  }) = _Book;
 
-  // Phương thức chuyển sang JSON
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'title': title,
-      'sub_title': subTitle,
-      'author': author,
-      'image': image,
-      'views': views,
-      'date_published': datePublished,
-      'date_updated': dateUpdated,
-      'chapter_count': chapterCount,
-      'latest_chapter_date': latestChapterDate,
-      'comments_count': commentsCount,
-      'content': content,
-      'category': category,
-      'status': status, // Thêm trạng thái
-    };
-  }
+  // JSON serialization/deserialization
+  factory Book.fromJson(Map<String, dynamic> json) => _$BookFromJson(json);
 }

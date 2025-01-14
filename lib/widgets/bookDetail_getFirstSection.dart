@@ -1,34 +1,27 @@
 import 'package:flutter/material.dart';
+import '../models/book.dart'; // Import model Book
 
-class BookdeailGetfirstsection extends StatefulWidget {
-  const BookdeailGetfirstsection({super.key});
+class BookdeailGetfirstsection extends StatelessWidget {
+  final Book book; // Nhận đối tượng Book từ bên ngoài
 
-  @override
-  State<BookdeailGetfirstsection> createState() =>
-      _BookdeailGetfirstsectionState();
-}
+  const BookdeailGetfirstsection({super.key, required this.book});
 
-class _BookdeailGetfirstsectionState extends State<BookdeailGetfirstsection> {
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
+        // Số lần đọc
         Column(
           children: [
             Text(
-              "1999",
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17),
+              book.views.toString(), // Hiển thị số lần đọc
+              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 17),
             ),
-            SizedBox(
-              height: 3,
-            ),
+            const SizedBox(height: 3),
             Row(
-              children: [
-                Icon(
-                  Icons.remove_red_eye_outlined,
-                  size: 14,
-                ),
+              children: const [
+                Icon(Icons.remove_red_eye_outlined, size: 14),
                 SizedBox(width: 3),
                 Text(
                   "Lần đọc",
@@ -38,20 +31,18 @@ class _BookdeailGetfirstsectionState extends State<BookdeailGetfirstsection> {
             ),
           ],
         ),
+        // Lượt bình chọn
         Column(
           children: [
             Text(
-              "1999",
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17),
+              book.commentsCount.toString(), // Hiển thị lượt bình chọn
+              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 17),
             ),
-            SizedBox(height: 3),
+            const SizedBox(height: 3),
             Row(
-              children: [
-                Icon(
-                  Icons.star,
-                  size: 14,
-                ),
-                SizedBox(height: 3),
+              children: const [
+                Icon(Icons.star, size: 14),
+                SizedBox(width: 3),
                 Text(
                   "Lượt bình chọn",
                   style: TextStyle(fontSize: 14, color: Colors.black45),
@@ -60,22 +51,18 @@ class _BookdeailGetfirstsectionState extends State<BookdeailGetfirstsection> {
             ),
           ],
         ),
+        // Số chương
         Column(
           children: [
             Text(
-              "1999",
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17),
+              book.chapterCount.toString(), // Hiển thị số chương
+              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 17),
             ),
-            SizedBox(
-              height: 3,
-            ),
+            const SizedBox(height: 3),
             Row(
-              children: [
-                Icon(
-                  Icons.list,
-                  size: 14,
-                ),
-                SizedBox(height: 3),
+              children: const [
+                Icon(Icons.list, size: 14),
+                SizedBox(width: 3),
                 Text(
                   "Số chương",
                   style: TextStyle(fontSize: 14, color: Colors.black45),

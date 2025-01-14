@@ -75,7 +75,7 @@ class _BookdeatilGetfifthsectionState extends State<BookdeatilGetfifthsection> {
                                 height: 160,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: NetworkImage(book.image),
+                                    image: NetworkImage(book.image ?? ''),
                                     fit: BoxFit.cover,
                                   ),
                                   borderRadius: BorderRadius.circular(12),
@@ -86,7 +86,7 @@ class _BookdeatilGetfifthsectionState extends State<BookdeatilGetfifthsection> {
                             Container(
                               width: 120,
                               child: Text(
-                                book.title,
+                                book.title ?? '',
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -99,7 +99,7 @@ class _BookdeatilGetfifthsectionState extends State<BookdeatilGetfifthsection> {
                             Container(
                               width: 120,
                               child: Text(
-                                book.subTitle,
+                                book.subTitle ?? '',
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(

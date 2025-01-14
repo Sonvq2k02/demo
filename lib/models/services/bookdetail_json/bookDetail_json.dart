@@ -1,12 +1,3 @@
-const List tags = [
-  {"label": "Viễn tưởng"},
-  {"label": "Kinh dị"},
-  {"label": "Trinh thám"},
-  {"label": "Viễn tưởng"},
-  {"label": "Viễn tưởng"},
-  {"label": "Viễn tưởng"},
-];
-
 // Danh sách chương
 const List chapters = [
   {"title": "Chương 1: Mở đầu", "date": "01/01/2024"},

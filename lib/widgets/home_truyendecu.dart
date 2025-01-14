@@ -61,47 +61,44 @@ class _HomeTruyendecuState extends State<HomeTruyendecu> {
                             bottom: 20,
                             left: 20,
                             right: 20,
-                            child: Row(
-                              children: [
-                                // Ảnh bìa sách
-                                Container(
-                                  width: 120,
-                                  height: 160,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: NetworkImage(books[index].image),
-                                      fit: BoxFit.cover,
-                                    ),
-                                    borderRadius: BorderRadius.circular(12),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => BookDetailPage(
+                                        bookId: books[index].id!),
                                   ),
-                                ),
-                                const SizedBox(width: 20),
-                                // Title và Subtitle
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  BookDetailPage(
-                                                title: books[index].title,
-                                                subtitle: books[index].subTitle,
-                                                image: books[index].image,
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                        child: Container(
-                                          //color: Colors.green,
+                                );
+                              },
+                              child: Row(
+                                children: [
+                                  // Ảnh bìa sách
+                                  Container(
+                                    width: 120,
+                                    height: 160,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: NetworkImage(
+                                            books[index].image ?? 'Unknown'),
+                                        fit: BoxFit.cover,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 20),
+                                  // Title và Subtitle
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        // Title
+                                        Container(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 8.0),
                                           child: Text(
-                                            books[index].title,
+                                            books[index].title ?? 'Unknown',
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                             style: const TextStyle(
@@ -110,21 +107,27 @@ class _HomeTruyendecuState extends State<HomeTruyendecu> {
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      const SizedBox(height: 8),
-                                      Text(
-                                        books[index].subTitle,
-                                        maxLines: 3,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
+                                        const SizedBox(height: 8),
+                                        // Subtitle
+                                        Container(
+                                          color: Colors.green[200],
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8.0),
+                                          child: Text(
+                                            books[index].subTitle ?? 'Unknown',
+                                            maxLines: 3,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ],

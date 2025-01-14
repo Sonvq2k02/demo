@@ -97,7 +97,7 @@ class _HomeTruyendhtState extends State<HomeTruyendht> {
                   height: 160,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: NetworkImage(book.image),
+                      image: NetworkImage(book.image ?? 'Unknown'),
                       fit: BoxFit.cover,
                     ),
                     borderRadius: BorderRadius.circular(12),
@@ -110,7 +110,7 @@ class _HomeTruyendhtState extends State<HomeTruyendht> {
             SizedBox(
               width: 120,
               child: Text(
-                book.title,
+                book.title ?? 'Unknown',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style:
@@ -122,7 +122,7 @@ class _HomeTruyendhtState extends State<HomeTruyendht> {
             SizedBox(
               width: 120,
               child: Text(
-                book.subTitle,
+                book.subTitle ?? 'Unknown',
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(

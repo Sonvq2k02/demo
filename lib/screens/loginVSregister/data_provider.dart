@@ -9,12 +9,3 @@ final usernameProvider = StateProvider<String>((ref) => '');
 final passwordProvider = StateProvider<String>((ref) => '');
 final isLoadingProvider = StateProvider<bool>((ref) => false);
 final authServiceProvider = Provider((ref) => AuthService());
-
-final bookListProvider = FutureProvider<List<Book>>((ref) async {
-  final apiService = ApiService(); // Khởi tạo service
-  return await apiService.fetchBooks(); // Gọi API
-});
-
-final bookListProvider = StateNotifierProvider<BookListNotifier, List<Book>>(
-  (ref) => BookListNotifier(),
-);

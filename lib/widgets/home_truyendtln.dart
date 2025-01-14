@@ -28,10 +28,19 @@ class _HomeTruyendtlnState extends State<HomeTruyendtln> {
           return Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
-        } else if (snapshot.hasData) {
+        } else if (snapshot.hasData &&
+            snapshot.data != null &&
+            snapshot.data!.isNotEmpty) {
           List<Book> completedBooks = snapshot.data!
-              .where((book) => book.commentsCount >= 100)
+              .where((book) =>
+                  book.commentsCount != null && book.commentsCount! >= 100)
               .toList();
+          //print(completedBooks);
+          //print('Response data: ${snapshot.data}');
+
+          if (completedBooks.isEmpty) {
+            return Center(child: Text('No books meet the criteria.'));
+          }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -78,7 +87,8 @@ class _HomeTruyendtlnState extends State<HomeTruyendtln> {
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
                                         image: NetworkImage(
-                                            completedBooks[index].image),
+                                            completedBooks[index].image ??
+                                                'Unknown'),
                                         fit: BoxFit.cover,
                                       ),
                                       borderRadius: BorderRadius.circular(12)),

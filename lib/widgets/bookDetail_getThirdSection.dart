@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../models/book.dart'; // Import model Book
 
 class BookdetailGetthirdsection extends StatefulWidget {
-  const BookdetailGetthirdsection({super.key});
+  final Book book;
+  const BookdetailGetthirdsection({super.key, required this.book});
 
   @override
   State<BookdetailGetthirdsection> createState() =>
@@ -14,11 +16,7 @@ class _BookdetailGetthirdsectionState extends State<BookdetailGetthirdsection>
 
   @override
   Widget build(BuildContext context) {
-    String longText = '''
-Flutter transforms the development process. Build, test, and deploy beautiful mobile, web, desktop, and embedded experiences from a single codebase.
-Fast
-Flutter code compiles to ARM or Intel machine code as well as JavaScript, for fast performance on any device.
-    ''';
+    String content = widget.book.content ?? 'Nội dung chưa được cập nhật.';
 
     return Container(
       // color: Colors.red,
@@ -37,7 +35,7 @@ Flutter code compiles to ARM or Intel machine code as well as JavaScript, for fa
             curve: Curves.easeInOut,
             alignment: Alignment.topCenter,
             child: Text(
-              longText,
+              content,
               maxLines:
                   _isExpanded ? null : 3, // Giới hạn 3 dòng khi chưa mở rộng
               overflow: _isExpanded

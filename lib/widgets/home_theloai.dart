@@ -38,20 +38,26 @@ class _HomeTheloaiState extends State<HomeTheloai> {
               return Center(child: Text('Error: ${snapshot.error}'));
             } else if (snapshot.hasData) {
               List<Map<String, String>> tags = snapshot.data!;
-              return SizedBox(
-                height: 40,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Wrap(
-                    spacing: 10,
-                    children: tags.map((tag) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: Colors.cyan,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        margin: const EdgeInsets.only(right: 10),
-                        child: Padding(
+
+              // Chia danh sách tags thành 2 phần
+              int halfway = (tags.length / 2).ceil();
+              List<Map<String, String>> firstRow = tags.sublist(0, halfway);
+              List<Map<String, String>> secondRow = tags.sublist(halfway);
+
+              return Column(
+                children: [
+                  // Dòng đầu tiên
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: firstRow.map((tag) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: Colors.cyan,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          margin: const EdgeInsets.only(right: 10, bottom: 10),
                           padding: const EdgeInsets.symmetric(
                               vertical: 6, horizontal: 10),
                           child: Text(
@@ -61,11 +67,36 @@ class _HomeTheloaiState extends State<HomeTheloai> {
                               color: Colors.black,
                             ),
                           ),
-                        ),
-                      );
-                    }).toList(),
+                        );
+                      }).toList(),
+                    ),
                   ),
-                ),
+                  // Dòng thứ hai
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: secondRow.map((tag) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: Colors.cyan,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          margin: const EdgeInsets.only(right: 10, bottom: 10),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 6, horizontal: 10),
+                          child: Text(
+                            tag['label']!,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: Colors.black,
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ],
               );
             } else {
               return const Center(child: Text('No tags found.'));

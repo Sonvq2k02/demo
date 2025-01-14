@@ -1,6 +1,6 @@
 import 'package:demo_app/models/user.dart';
 import 'package:demo_app/screens/homePage/AppDemo.dart';
-import 'package:demo_app/screens/loginVSregister/login_provider.dart';
+import 'package:demo_app/screens/loginVSregister/data_provider.dart';
 import 'package:demo_app/screens/loginVSregister/login_userinfo.dart';
 import 'package:demo_app/screens/loginVSregister/register_view.dart';
 import 'package:demo_app/ui/main/home_page.dart';
