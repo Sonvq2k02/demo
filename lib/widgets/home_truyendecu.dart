@@ -67,7 +67,9 @@ class _HomeTruyendecuState extends State<HomeTruyendecu> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => BookDetailPage(
-                                        bookId: books[index].id!),
+                                      bookId: books[index].id!,
+                                      book: books[index],
+                                    ),
                                   ),
                                 );
                               },

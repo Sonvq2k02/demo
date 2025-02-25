@@ -1,10 +1,10 @@
 import 'package:demo_app/widgets/home_appbar.dart';
 import 'package:flutter/material.dart';
 
-import '../../widgets/Write_getFourthSection.dart';
-import '../../widgets/Write_getSecondSection.dart';
-import '../../widgets/Write_getThirdSection.dart';
-import '../../widgets/write_getFirstSection.dart';
+import 'write_getFirstSection.dart';
+import 'write_getFourthSection.dart';
+import 'write_getSecondSection.dart';
+import 'write_getThirdSection.dart';
 
 class WritePage extends StatefulWidget {
   const WritePage({super.key});

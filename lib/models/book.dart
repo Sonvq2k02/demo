@@ -24,4 +24,21 @@ class Book with _$Book {
 
   // JSON serialization/deserialization
   factory Book.fromJson(Map<String, dynamic> json) => _$BookFromJson(json);
+
+  static var empty = Book(
+    id: -1,
+    title: "Không có tiêu đề",
+    subTitle: "Không có mô tả",
+    author: "Không rõ",
+    image: "",
+    views: 0,
+    datePublished: "",
+    dateUpdated: "",
+    chapterCount: 0,
+    latestChapterDate: "",
+    commentsCount: 0,
+    content: "",
+    category: "",
+    status: "",
+  );
 }

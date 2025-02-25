@@ -2,64 +2,44 @@ import 'package:flutter/material.dart';
 import 'package:demo_app/utils/bottom_sheet_helpers.dart';
 
 import '../../models/models.dart';
-import '../../models/services/books_api_service.dart';
 import '../../widgets/bookDeatil_getFifthSection.dart';
-import '../../widgets/bookDetail_getFirstSection.dart'; // Đã cập nhật để nhận Book
+import '../../widgets/bookDetail_getFirstSection.dart';
 import '../../widgets/bookDetail_getFourthSection.dart';
 import '../../widgets/bookDetail_getSecondSection.dart';
 import '../../widgets/bookDetail_getThirdSection.dart';
 
-class BookDetailPage extends StatefulWidget {
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../writePage/book_provider.dart';
+
+class BookDetailPage extends ConsumerWidget {
   final int bookId;
 
-  const BookDetailPage({super.key, required this.bookId});
+  const BookDetailPage({super.key, required this.bookId, required Book book});
 
   @override
-  _BookDetailPageState createState() => _BookDetailPageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final books = ref.watch(bookProvider); // Lấy danh sách sách từ provider
+    final book =
+        books.firstWhere((b) => b.id == bookId, orElse: () => Book.empty);
 
-class _BookDetailPageState extends State<BookDetailPage> {
-  late Future<Book> futureBook;
+    if (book.id == -1) {
+      return const Scaffold(
+        body: Center(child: Text('Không tìm thấy sách!')),
+      );
+    }
 
-  @override
-  void initState() {
-    super.initState();
-    futureBook = ApiService().fetchBookById(widget.bookId);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<Book>(
-      future: futureBook,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Scaffold(
-            body: Center(child: CircularProgressIndicator()),
-          );
-        } else if (snapshot.hasError) {
-          return Scaffold(
-            body: Center(child: Text('Error: ${snapshot.error}')),
-          );
-        } else if (snapshot.hasData) {
-          final book = snapshot.data!;
-          return Scaffold(
-            backgroundColor: Colors.white,
-            appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(180),
-              child: _CustomAppBar(
-                title: book.title ?? 'No Title',
-                subtitle: book.subTitle ?? 'No Subtitle',
-                image: book.image ?? '',
-              ),
-            ),
-            body: _getBody(book), // Truyền Book vào Body
-          );
-        } else {
-          return const Scaffold(
-            body: Center(child: Text('No data available')),
-          );
-        }
-      },
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(180),
+        child: _CustomAppBar(
+          title: book.title ?? 'No Title',
+          subtitle: book.subTitle ?? 'No Subtitle',
+          image: book.image ?? '',
+        ),
+      ),
+      body: _getBody(book),
     );
   }
 }

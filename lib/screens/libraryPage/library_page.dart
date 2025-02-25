@@ -1,10 +1,10 @@
 import 'package:demo_app/widgets/home_appbar.dart';
 import 'package:flutter/material.dart';
 
-import '../../widgets/library_getFirstSection.dart';
-import '../../widgets/library_getFourthSection.dart';
-import '../../widgets/library_getSecondSection.dart';
-import '../../widgets/library_getThirdSection.dart';
+import 'library_getFirstSection.dart';
+import 'library_getFourthSection.dart';
+import 'library_getSecondSection.dart';
+import 'library_getThirdSection.dart';
 
 class LibraryPage extends StatefulWidget {
   const LibraryPage({super.key});

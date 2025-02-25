@@ -1,22 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../models/book.dart';
+import '../screens/writePage/book_provider.dart';
+import '../screens/writePage/book_provider.dart';
 
-import '../models/services/bookdetail_json/bookDetail_json.dart';
-
-class BookdetailGetfourthsection extends StatefulWidget {
+class BookdetailGetfourthsection extends ConsumerStatefulWidget {
   const BookdetailGetfourthsection({super.key});
 
   @override
-  State<BookdetailGetfourthsection> createState() =>
+  ConsumerState<BookdetailGetfourthsection> createState() =>
       _BookdetailGetfourthsectionState();
 }
 
 class _BookdetailGetfourthsectionState
-    extends State<BookdetailGetfourthsection> {
-  bool _isExpanded =
-      false; // Biến trạng thái để hiển thị hoặc thu gọn danh sách chương
+    extends ConsumerState<BookdetailGetfourthsection> {
+  bool _isExpanded = false; // Trạng thái mở rộng danh sách chương
 
   @override
   Widget build(BuildContext context) {
+    final books = ref.watch(bookProvider);
+    final book = books.isNotEmpty ? books.first : null;
+    final chapters = generateChapters(book?.chapterCount ?? 0);
+
+    // Kiểm tra nếu không có chương nào
+    if (book?.chapterCount == 0) {
+      return const Center(
+        child: Text(
+          "Không có chương nào",
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        ),
+      );
+    }
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -28,10 +43,10 @@ class _BookdetailGetfourthsectionState
             children: [
               Row(
                 children: [
-                  Icon(Icons.menu_book_rounded, color: Colors.black),
+                  const Icon(Icons.menu_book_rounded, color: Colors.black),
                   const SizedBox(width: 8),
                   Text(
-                    "${chapters.length} chương",
+                    "${book?.chapterCount} chương",
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -47,7 +62,7 @@ class _BookdetailGetfourthsectionState
                 },
                 child: Text(
                   _isExpanded ? "Ẩn" : "Xem tất cả",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     color: Colors.purple,
                     fontWeight: FontWeight.w500,
@@ -64,13 +79,11 @@ class _BookdetailGetfourthsectionState
             child: Column(
               children: List.generate(
                 _isExpanded
-                    ? chapters.length // Hiển thị tất cả nếu mở rộng
-                    : 3, // Hiển thị 3 chương mới nhất nếu rút gọn
+                    ? chapters.length
+                    : 3, // Hiển thị tất cả hoặc chỉ 3 chương đầu
                 (index) {
-                  // Lấy chương mới nhất khi rút gọn
-                  final chapter = _isExpanded
-                      ? chapters[index]
-                      : chapters[chapters.length - 1 - index];
+                  final chapter = chapters[index];
+
                   return Container(
                     decoration: BoxDecoration(
                       color: Colors.grey.shade100,
@@ -80,11 +93,11 @@ class _BookdetailGetfourthsectionState
                     margin: const EdgeInsets.only(bottom: 8.0),
                     child: ListTile(
                       title: Text(
-                        chapter["title"],
+                        chapter.title,
                         style: const TextStyle(fontSize: 16),
                       ),
                       subtitle: Text(
-                        chapter["date"],
+                        chapter.date,
                         style: TextStyle(color: Colors.grey.shade600),
                       ),
                       contentPadding: const EdgeInsets.symmetric(

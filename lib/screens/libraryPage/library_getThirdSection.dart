@@ -13,7 +13,6 @@ class _LibraryGetthirdsectionState extends State<LibraryGetthirdsection> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Hàng hiển thị "Riêng tư"
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -52,7 +51,7 @@ class _LibraryGetthirdsectionState extends State<LibraryGetthirdsection> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Hình ảnh (màu xanh)
+                          // Hình ảnh
                           Container(
                             width: double.infinity,
                             height: 245,
@@ -62,6 +61,7 @@ class _LibraryGetthirdsectionState extends State<LibraryGetthirdsection> {
                             ),
                           ),
                           SizedBox(height: 10),
+                          // Thanh tiến trình
                           Container(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -92,7 +92,6 @@ class _LibraryGetthirdsectionState extends State<LibraryGetthirdsection> {
                           ),
                           // Tiêu đề
                           SizedBox(height: 10),
-
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [

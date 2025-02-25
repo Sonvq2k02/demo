@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../screens/writePage/add_story.dart';
+import 'add_story.dart';
 
 class WriteGetsecondsection extends StatefulWidget {
   const WriteGetsecondsection({super.key});

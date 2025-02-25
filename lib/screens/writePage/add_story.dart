@@ -1,15 +1,17 @@
-import 'package:demo_app/widgets/home_truyendecu.dart';
+import 'package:demo_app/screens/writePage/book_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../models/book.dart';
 
-import '../../widgets/home_truyendht.dart';
-
-class AddStoryPage extends StatelessWidget {
+class AddStoryPage extends ConsumerWidget {
   AddStoryPage({Key? key}) : super(key: key);
-  TextEditingController titleController = TextEditingController();
-  TextEditingController subtitleController = TextEditingController();
+
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController subtitleController = TextEditingController();
+  final TextEditingController imageController = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -19,18 +21,35 @@ class AddStoryPage extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () {
-              // String title = titleController.text;
-              // String subTitle = subtitleController.text;
+              if (titleController.text.isEmpty ||
+                  subtitleController.text.isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Vui lòng nhập đủ thông tin')),
+                );
+                return;
+              }
 
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => HomeTruyendecu(
-              //       title: title,
-              //       subtitle: subTitle,
-              //     ),
-              //   ),
-              // );
+              final newBook = Book(
+                id: DateTime.now().millisecondsSinceEpoch, // ID tạm thời
+                title: titleController.text,
+                subTitle: subtitleController.text,
+                image: imageController.text.isNotEmpty
+                    ? imageController.text
+                    : "https://via.placeholder.com/150",
+                views: 0,
+                datePublished: DateTime.now().toString(),
+                dateUpdated: DateTime.now().toString(),
+                chapterCount: 0,
+                latestChapterDate: DateTime.now().toString(),
+                commentsCount: 0,
+                content: "Nội dung sẽ cập nhật sau",
+                category: "Chưa có thể loại",
+                status: "Đang cập nhật",
+              );
+
+              ref.read(bookProvider.notifier).addBook(newBook);
+              print("Đã thêm sách: ${newBook.title}");
+              Navigator.pop(context); // Quay lại màn hình trước đó
             },
             child: const Text(
               'LƯU',
@@ -50,8 +69,32 @@ class AddStoryPage extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                // Hành động thêm ảnh bìa
-                print("Thêm ảnh bìa");
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const Text("Nhập URL ảnh bìa"),
+                      content: TextField(
+                        controller: imageController,
+                        decoration: const InputDecoration(
+                          hintText: "Dán URL ảnh vào đây",
+                        ),
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text("Hủy"),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("Xác nhận"),
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
               child: Container(
                 width: 100,
@@ -60,32 +103,36 @@ class AddStoryPage extends StatelessWidget {
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.add, size: 40, color: Colors.grey),
-                      SizedBox(height: 8),
-                      Text(
-                        'Thêm một bìa',
-                        style: TextStyle(color: Colors.grey),
-                      ),
-                    ],
-                  ),
-                ),
+                child: imageController.text.isEmpty
+                    ? const Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.add, size: 40, color: Colors.grey),
+                            SizedBox(height: 8),
+                            Text(
+                              'Thêm một bìa',
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                          ],
+                        ),
+                      )
+                    : Image.network(imageController.text, fit: BoxFit.cover),
               ),
             ),
             const SizedBox(height: 20),
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              controller: titleController,
+              decoration: const InputDecoration(
                 labelText: 'Tiêu Đề Truyện',
                 border: UnderlineInputBorder(),
               ),
             ),
             const SizedBox(height: 20),
-            const TextField(
+            TextField(
+              controller: subtitleController,
               maxLines: 4,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Mô Tả Truyện',
                 border: UnderlineInputBorder(),
               ),

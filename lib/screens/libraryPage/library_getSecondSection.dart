@@ -12,13 +12,18 @@ class _LibraryGetsecondsectionState extends State<LibraryGetsecondsection> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(
+      child: Column(
         children: [
-          Text("Đọc hiện tại"),
-          const SizedBox(width: 10),
-          Text("Kho lưu trữ"),
-          const SizedBox(width: 10),
-          Text("Danh sách đọc"),
+          Row(
+            children: [
+              Text("Đọc hiện tại"),
+              const SizedBox(width: 10),
+              Text("Kho lưu trữ"),
+              const SizedBox(width: 10),
+              Text("Danh sách đọc"),
+              // Hàng hiển thị "Riêng tư"
+            ],
+          ),
         ],
       ),
     );
