@@ -1,13 +1,28 @@
 import 'package:demo_app/screens/loginVSregister/login_service.dart';
+import 'package:demo_app/screens/loginVSregister/login_view.dart';
 import 'package:flutter/material.dart';
 
 class UserInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authService = AuthService();
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Thông tin người dùng"),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: () async {
+              await authService.logout(); // Gọi hàm đăng xuất
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => LoginView()),
+                (route) => false, // Xóa toàn bộ stack điều hướng trước đó
+              );
+            },
+          ),
+        ],
       ),
       body: FutureBuilder<Map<String, dynamic>?>(
         future: authService.fetchUserInfo(),

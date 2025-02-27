@@ -2,6 +2,7 @@ import 'package:demo_app/screens/loginVSregister/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../screens/loginVSregister/login_service.dart';
 import '../screens/loginVSregister/login_userinfo.dart';
 
 class HomeAppbar extends StatefulWidget {
@@ -30,8 +31,9 @@ class _HomeAppbarState extends State<HomeAppbar> {
         ),
         GestureDetector(
           onTap: () async {
-            final prefs = await SharedPreferences.getInstance();
-            final isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+            final authService = AuthService();
+            final isLoggedIn =
+                await authService.checkLoginStatus(); // Dùng hàm từ AuthService
 
             if (isLoggedIn) {
               Navigator.push(

@@ -7,13 +7,13 @@ import '../../models/models.dart';
 class AuthService {
   final Dio _dio = Dio(
     BaseOptions(
-      baseUrl: 'https://graphapi.ttbadminton.vn/',
+      baseUrl: 'https://105a7394-9e19-4b48-9270-6fa500fe4b4a.mock.pstmn.io/',
       followRedirects: false,
       validateStatus: (status) => true, // Allow all status codes
     ),
   );
 
-  final String _loginUrl = 'auth/v1/login';
+  final String _loginUrl = 'auth/v1/login2';
   Future<bool> login(
       {required String username, required String password}) async {
     try {

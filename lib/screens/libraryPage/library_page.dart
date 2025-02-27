@@ -38,8 +38,23 @@ class _LibraryPageState extends State<LibraryPage> {
             LibraryGetsecondsection(),
             Divider(color: Colors.grey.shade300),
             const SizedBox(height: 10),
-            LibraryGetthirdsection(),
-            const SizedBox(height: 10),
+            // LibraryGetthirdsection(),
+            // const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Icon(
+                  Icons.lock,
+                  color: Colors.grey[500],
+                  size: 13,
+                ),
+                const SizedBox(width: 10),
+                Text(
+                  "Riêng tư",
+                  style: TextStyle(color: Colors.grey[500], fontSize: 13),
+                ),
+              ],
+            ),
             LibraryGetfourthsection(),
             const SizedBox(height: 10),
 
